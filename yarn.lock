@@ -5871,10 +5871,6 @@ string_decoder@~1.0.3:
   dependencies:
     safe-buffer "~5.1.0"
 
-"string_score@git+https://github.com/ThiagoNP/string_score.git":
-  version "0.1.20"
-  resolved "git+https://github.com/ThiagoNP/string_score.git#62588b6c43fe957f631f6bfd76300cad678a7941"
-
 stringstream@~0.0.4, stringstream@~0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"

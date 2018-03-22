@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { TouchableHighlight, Text, TextInput, View } from 'react-native'
-import stringScore from 'string_score'
 import Styles from './Styles'
 
 class AutoComplete extends Component {
@@ -25,14 +24,6 @@ class AutoComplete extends Component {
     return suggestion
   }
 
-  isSimilar = (value, suggestionText) => {
-    const suggestionScore = stringScore(
-      suggestionText, value, this.props.comparationFuzziness
-    )
-
-    return suggestionScore >= this.props.minimumSimilarityScore
-  }
-
   shouldFilterSuggestions = (newSuggestions, value) => {
     return newSuggestions && newSuggestions.length &&
       value && !this.selectedSuggestion
@@ -46,7 +37,7 @@ class AutoComplete extends Component {
     return newSuggestions.reduce((suggestions, suggestion) => {
       const suggestionText = this.getSuggestionText(suggestion)
 
-      if (!suggestionText || !this.isSimilar(value, suggestionText)) {
+      if (!suggestionText || suggestionText.toLowerCase().indexOf(value.toLowerCase()) === -1) {
         return suggestions
       }
 
@@ -70,7 +61,7 @@ class AutoComplete extends Component {
   }
 
   renderSuggestions = () => {
-    const suggestionTexts = Object.keys(this.suggestions || {})
+    const suggestionTexts = Object.keys(this.suggestions || {}).slice(0, 5)
 
     if (!suggestionTexts.length) {
       return null
